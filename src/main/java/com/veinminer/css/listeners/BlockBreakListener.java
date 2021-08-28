@@ -59,7 +59,6 @@ public class BlockBreakListener implements Listener {
 
         Set<Block> vein = new HashSet<>();
         findVein(vein, block);
-        player.sendMessage(String.format("Found %s blocks in this vein", vein.size()));
         for (Block veinMember : vein) {
             veinMember.breakNaturally(player.getInventory().getItemInMainHand());
         }
