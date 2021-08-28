@@ -20,6 +20,10 @@ Copy the directory and execute the command ``mvn package``. Once it's done you s
 
 /veinminer whitelist remove [MATERIAL] - Removes a material from the whitelist
 
+## Permissions
+
+veinminer.whitelist - Access to /veinminer whitelist and all subcommands
+
 ## Config 
 
 Inside the configuration file there are currently 2 variables:
