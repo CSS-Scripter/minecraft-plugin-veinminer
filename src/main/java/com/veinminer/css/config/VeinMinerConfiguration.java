@@ -21,8 +21,12 @@ public class VeinMinerConfiguration {
     }
     private void initializeVeinMiner() {
         FileConfiguration config = plugin.getConfig();
-        this.veinMinerWhitelist = parseStringListToMaterialList(config.getStringList(ConfigPathEnum.BLOCK_WHITELIST.toString()));
+        updateWhitelist();
         this.veinMineLimit = config.getInt(ConfigPathEnum.BLOCK_LIMIT.toString());
+    }
+
+    private void updateWhitelist() {
+        this.veinMinerWhitelist = parseStringListToMaterialList(getConfig().getStringList(ConfigPathEnum.BLOCK_WHITELIST.toString()));
     }
 
     private void logInitialization() {
@@ -52,13 +56,32 @@ public class VeinMinerConfiguration {
     }
 
     public boolean addMaterialToWhitelist(Material material) {
-        FileConfiguration config = plugin.getConfig();
-        List<String> currentWhitelist = config.getStringList("blockWhitelist");
+        List<String> currentWhitelist = getWhiteListFromConfig();
         if (currentWhitelist.contains(material.toString())) return false;
         currentWhitelist.add(material.toString());
-        config.set(ConfigPathEnum.BLOCK_WHITELIST.toString(), currentWhitelist);
-        plugin.saveConfig();
-        this.veinMinerWhitelist = parseStringListToMaterialList(currentWhitelist);
+        saveWhiteListToConfig(currentWhitelist);
         return true;
+    }
+
+    public boolean removeMaterialFromWhitelist(Material material) {
+        List<String> currentWhitelist = getWhiteListFromConfig();
+        if (!currentWhitelist.contains(material.toString())) return false;
+        currentWhitelist.remove(material.toString());
+        saveWhiteListToConfig(currentWhitelist);
+        return true;
+    }
+
+    private FileConfiguration getConfig() {
+        return plugin.getConfig();
+    }
+
+    private List<String> getWhiteListFromConfig() {
+        return getConfig().getStringList(ConfigPathEnum.BLOCK_WHITELIST.toString());
+    }
+
+    private void saveWhiteListToConfig(List<String> whitelist) {
+        getConfig().set(ConfigPathEnum.BLOCK_WHITELIST.toString(), whitelist);
+        plugin.saveConfig();
+        updateWhitelist();
     }
 }

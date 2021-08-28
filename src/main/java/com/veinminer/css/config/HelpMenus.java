@@ -14,10 +14,13 @@ public class HelpMenus {
     public HelpMenus() {
         helpMenus.put(DEFAULT_KEY, new HelpMenuCommandEntry[]{
                 new HelpMenuCommandEntry("/veinminer help", "Shows this menu"),
-                new HelpMenuCommandEntry("/veinminer whitelist add [blocktype]", "Adds a blocktype to the whitelist")
+                new HelpMenuCommandEntry("/veinminer whitelist help", "Shows commands for managing whitelist")
         });
         helpMenus.put(HelpMenuEnum.WHITELIST, new HelpMenuCommandEntry[]{
-                new HelpMenuCommandEntry("/veinminer whitelist add [blocktype]", "Adds a blocktype to the whitelist")
+                new HelpMenuCommandEntry("/veinminer whitelist help", "Shows this menu"),
+                new HelpMenuCommandEntry("/veinminer whitelist list", "Displays all whitelisted blocks"),
+                new HelpMenuCommandEntry("/veinminer whitelist add [blocktype]", "Adds a block to the whitelist"),
+                new HelpMenuCommandEntry("/veinminer whitelist remove [blocktype]", "Removes a block to the whitelist")
         });
     }
 
@@ -36,6 +39,6 @@ public class HelpMenus {
     }
 
     private String createSuffix() {
-        return ChatColor.GRAY + "By CSS-Scripter";
+        return ChatColor.DARK_GRAY + "=-- By CSS-Scripter --=";
     }
 }

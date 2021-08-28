@@ -1,6 +1,8 @@
 package com.veinminer.css.commands;
 
 import com.veinminer.css.commands.whitelist.WhitelistAddCommand;
+import com.veinminer.css.commands.whitelist.WhitelistListCommand;
+import com.veinminer.css.commands.whitelist.WhitelistRemoveCommand;
 import com.veinminer.css.enums.HelpMenuEnum;
 import com.veinminer.css.models.SubCommand;
 import org.bukkit.command.Command;
@@ -19,6 +21,8 @@ public class WhitelistCommand extends SubCommand {
         super(permission);
         subCommands.put(DEFAULT_COMMAND, new HelpCommand(HelpMenuEnum.WHITELIST));
         subCommands.put("add", new WhitelistAddCommand());
+        subCommands.put("remove", new WhitelistRemoveCommand());
+        subCommands.put("list", new WhitelistListCommand());
     }
 
     @Override
