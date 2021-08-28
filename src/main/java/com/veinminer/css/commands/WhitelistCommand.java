@@ -6,6 +6,7 @@ import com.veinminer.css.models.SubCommand;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,6 +27,6 @@ public class WhitelistCommand extends SubCommand {
         String arg = args.length == 0 ? DEFAULT_COMMAND : args[0];
         SubCommand subCommand = subCommands.get(arg);
         if (subCommand == null) subCommand = subCommands.get(DEFAULT_COMMAND);
-        return subCommand.onCommand(sender, command, args);
+        return subCommand.onCommand(sender, command, Arrays.copyOfRange(args, Math.min(args.length, 1), args.length));
     }
 }

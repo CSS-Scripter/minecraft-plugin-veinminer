@@ -1,6 +1,7 @@
 package com.veinminer.css.listeners;
 
 import com.veinminer.css.config.Configuration;
+import com.veinminer.css.config.VeinMinerConfiguration;
 import com.veinminer.css.models.Vector3D;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -65,7 +66,8 @@ public class BlockBreakListener implements Listener {
     }
 
     private boolean isBlockWhitelisted(Block block) {
-        return Configuration.getInstance().getVeinMinerWhitelist().contains(block.getType());
+        VeinMinerConfiguration vmConfig = Configuration.getInstance().getVeinMinerConfiguration();
+        return vmConfig.getVeinMinerWhitelist().contains(block.getType());
     }
 
     private boolean isPlayerUsingPreferredTool(Block block, Player player) {
@@ -74,7 +76,8 @@ public class BlockBreakListener implements Listener {
     }
 
     private void findVein(Set<Block> vein, Block currentBlock) {
-        if (vein.size() >= Configuration.getInstance().getVeinMineLimit()) return;
+        VeinMinerConfiguration vmConfig = Configuration.getInstance().getVeinMinerConfiguration();
+        if (vein.size() >= vmConfig.getVeinMineLimit()) return;
         vein.add(currentBlock);
         Material veinType = currentBlock.getType();
         for (Vector3D v : adjacent) {

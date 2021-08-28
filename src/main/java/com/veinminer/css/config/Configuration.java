@@ -25,44 +25,19 @@ public class Configuration {
     }
     // Singleton stuff ===========================
 
-    private List<Material> veinMinerWhitelist;
-    private int veinMineLimit;
+    private FileConfiguration config;
+    private Logger logger;
+
     private String pluginVersion;
+    private VeinMinerConfiguration veinMinerConfiguration;
 
     public void initializeConfig(JavaPlugin plugin) {
-        initializeVeinMiner(plugin.getConfig());
-        logInitialization(plugin.getLogger());
+        veinMinerConfiguration = new VeinMinerConfiguration(plugin);
         this.pluginVersion = plugin.getDescription().getVersion();
     }
 
-    private void initializeVeinMiner(FileConfiguration config) {
-        this.veinMinerWhitelist = parseStringListToMaterialList(config.getStringList("blockWhitelist"));
-        this.veinMineLimit = config.getInt("veinMineLimit");
-    }
-
-    private void logInitialization(Logger logger) {
-        logger.info(String.format(
-                "List of whitelisted materials has been initialized \n%s",
-                veinMinerWhitelist.stream()
-                        .map(Enum::toString)
-                        .collect(Collectors.joining("\n- ", "- ", ""))
-        ));
-        logger.info(String.format(
-                "VeinMine limit has been initialized at a value of %s",
-                veinMineLimit
-        ));
-    }
-
-    private List<Material> parseStringListToMaterialList(List<String> stringList) {
-        return stringList.stream().map(Material::valueOf).collect(Collectors.toList());
-    }
-
-    public List<Material> getVeinMinerWhitelist() {
-        return veinMinerWhitelist;
-    }
-
-    public int getVeinMineLimit() {
-        return veinMineLimit;
+    public VeinMinerConfiguration getVeinMinerConfiguration() {
+        return this.veinMinerConfiguration;
     }
 
     public String getPluginVersion() {
