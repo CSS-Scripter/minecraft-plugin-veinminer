@@ -1,5 +1,9 @@
 name: Veinminer
 main: com.veinminer.css.Main
-version: 1.0
+version: 1.1
 author: CSS-Scripter
 api-version: 1.17
+commands:
+  veinminer:
+    description: Mine veins in a single blockbreak!
+    usage: /veinminer

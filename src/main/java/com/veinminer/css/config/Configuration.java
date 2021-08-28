@@ -27,10 +27,12 @@ public class Configuration {
 
     private List<Material> veinMinerWhitelist;
     private int veinMineLimit;
+    private String pluginVersion;
 
     public void initializeConfig(JavaPlugin plugin) {
         initializeVeinMiner(plugin.getConfig());
         logInitialization(plugin.getLogger());
+        this.pluginVersion = plugin.getDescription().getVersion();
     }
 
     private void initializeVeinMiner(FileConfiguration config) {
@@ -61,5 +63,9 @@ public class Configuration {
 
     public int getVeinMineLimit() {
         return veinMineLimit;
+    }
+
+    public String getPluginVersion() {
+        return pluginVersion;
     }
 }
